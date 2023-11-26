@@ -1,0 +1,31 @@
+body{
+    background-color: bisque;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.contrast{
+    background-color: #AB9182;
+}
+
+.btnLink{
+    border: none;
+    color: blue;
+    text-decoration: underline;
+}
+
+.banner {
+    position: sticky;
+    top: 0;
+}
+
+.add{
+    background-color: #FEFBEA;
+}
+
+.clawLike{
+    transform: rotate(-90deg);
+}
+
+.clawDislike{
+    transform: rotate(90deg);
+}
