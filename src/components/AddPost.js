@@ -1,3 +1,4 @@
+import React from 'react'
 import { useSessionStorage } from 'react-storage-complete'
 
 export default function AddPost ({ state, addPost = f => f }) {

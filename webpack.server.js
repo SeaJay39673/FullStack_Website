@@ -1,16 +1,16 @@
-const path = require("path");
-const nodeExternals = require("webpack-node-externals");
+const path = require('path')
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
-  entry: "./server/server.js",
+  entry: './server/www.js',
 
-  target: "node",
+  target: 'node',
 
   externals: [nodeExternals()],
 
   output: {
-    path: path.resolve("build-server"),
-    filename: "index.js"
+    path: path.resolve('bin'),
+    filename: 'www.js'
   },
 
   module: {
@@ -19,8 +19,8 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
-        options: { presets: ['@babel/env','@babel/preset-react'] },
-      },
+        options: { presets: ['@babel/env', '@babel/preset-react'] }
+      }
     ]
   }
-};
+}

@@ -14,9 +14,8 @@ import cors from 'cors'
 import bp from 'body-parser'
 
 import App from '../src/App.js'
-import exp from 'constants'
 
-const PORT = process.env.port || 3000
+// const PORT = process.env.port || 3000
 const app = express()
 
 app.use(bp.json({ limit: '100mb' }))
@@ -51,8 +50,11 @@ app.get('/*', (req, res) => {
   })
 })
 
-mongoose.connect(process.env.ATLAS_URI).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}.`)
-  })
-})
+const connectToDB = async () => {
+  const connected = await mongoose.connect(process.env.ATLAS_URI)
+  return connected
+}
+
+connectToDB()
+
+export default app
