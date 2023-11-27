@@ -37,7 +37,7 @@
     "prod:build-server": "webpack --node-env production --config webpack.server.js --mode production -w",
     "server": "nodemon ./build-server/index.js",
     "dev": "npm-run-all --parallel build dev:* react server",
-    "start": "npm-run-all --parallel prod:* build server"
+    "start": "prod:* && server"
   },
   "eslintConfig": {
     "extends": [
