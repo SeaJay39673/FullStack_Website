@@ -16,7 +16,7 @@ import bp from 'body-parser'
 import App from '../src/App.js'
 import exp from 'constants'
 
-const PORT = process.env.port || 4000
+const PORT = process.env.port || 3000
 const app = express()
 
 app.use(bp.json({ limit: '100mb' }))
