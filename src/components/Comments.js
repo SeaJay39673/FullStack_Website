@@ -17,7 +17,7 @@ export default function Comments ({ state }) {
   const getComments = async () => {
     const response = await fetch(`${ApiUrl}/api/comments/${post._id}`)
     const data = await response.json()
-    setComments(data.sort((a, b) => new Date(b.date) - new Date(a.date)))
+    setComments(data.sort((a, b) => new Date(a.date) - new Date(b.date)))
   }
 
   useEffect(() => {

@@ -9,8 +9,9 @@ import Post from './Post'
 import AddPost from './AddPost.js'
 import ApiUrl from '../helpers/ApiUrl.js'
 import { useNavigate } from 'react-router'
+import LoggedButton from '../helpers/LoggedButton.js'
 
-export default function Posts ({ state, account }) {
+export default function Posts ({ state, setState, account }) {
   const [posts, setPosts] = useSessionStorage('Posts', [])
   const [filter, setFilter] = useSessionStorage('Filter', { status: 'Dates' })
   const [render, setRender] = useSessionStorage('Render', false)
@@ -29,7 +30,7 @@ export default function Posts ({ state, account }) {
 
   const getPosts = async () => {
     const response = await fetch(
-      `${ApiUrl}/api/posts/${account ? state.account._id : ''}`
+      `${ApiUrl}/api/posts/${account ? state.account._id : 'null'}`
     )
     if (response.ok) {
       const data = await response.json()
@@ -93,10 +94,15 @@ export default function Posts ({ state, account }) {
             <tr>
               <th style={{ textAlign: 'center' }}></th>
               <th style={{ textAlign: 'right' }}>
-                <button className='btn' onClick={() => navigate('/Account')}>
-                  <MdAccountCircle size={40} />
-                  <p>Accoutn</p>
-                </button>
+                {(state.account?._id ?? null) !== null && (
+                  <button className='btn' onClick={() => navigate('/Account')}>
+                    <MdAccountCircle size={40} />
+                    <p>Accoutn</p>
+                  </button>
+                )}
+                {(state.account?._id ?? null) === null && (
+                  <LoggedButton setState={setState} />
+                )}
               </th>
             </tr>
           </table>

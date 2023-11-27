@@ -5,7 +5,6 @@ import PostModel from '../schemas/PostModel.js'
 import CommentModel from '../schemas/CommentModel.js'
 
 const router = express.Router()
-
 router.post('/login', async (req, res) => {
   const target = await Account.findOne({
     username: req.body.username,
@@ -52,6 +51,24 @@ router.get('/:_id', async (req, res) => {
   } catch (e) {
     res.status(404).json({ error: 'error getting account by id' })
   }
+})
+
+router.post('/update:_id', async (req, res) => {
+  let account = await Account.findById(req.params._id)
+  account.profile = Buffer.from(req.body.profile.split(',')[1], 'base64')
+  account.name = req.body.name !== '' ? req.body.name : account.name
+  account.bio = req.body.bio
+  account.password =
+    req.body.password !== '' ? req.body.password : account.password
+  const savedAccout = await account.save()
+  const { password, ...returnAccount } = savedAccout._doc
+  const result = {
+    ...returnAccount,
+    profile:
+      'data:image/png;base64,' +
+      Buffer.from(account.profile, 'base64').toString('base64')
+  }
+  res.status(200).json(result)
 })
 
 export default router

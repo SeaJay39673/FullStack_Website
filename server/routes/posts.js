@@ -5,9 +5,8 @@ const router = express.Router()
 
 router.get('/:_id', async (req, res) => {
   let posts
-  if (req.params._id ?? null !== null) {
+  if (req.params._id !== 'null') {
     posts = await Post.find({ user: req.params._id })
-    console.log(posts)
   } else {
     posts = await Post.find({})
   }
@@ -25,7 +24,6 @@ router.get('/:_id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  console.log(req.body.image !== null ? 'image' : 'no Image')
   const post = await Post.create({
     user: req.body.user,
     caption: req.body.caption,

@@ -1,12 +1,15 @@
 import { useSessionStorage } from 'react-storage-complete'
 import ApiUrl from '../helpers/ApiUrl'
+import { useEffect } from 'react'
 export default function AddComment ({ state, postId, setRender = f => f }) {
   const [add, setAdd] = useSessionStorage('CommentAdd', false)
   const [comment, setComment] = useSessionStorage('CommentMessage', '')
-  window.scrollTo({
-    top: 0,
-    behavior: 'instant'
-  })
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    })
+  }, [])
   const AddComment = async () => {
     if (comment !== '') {
       setComment('')
