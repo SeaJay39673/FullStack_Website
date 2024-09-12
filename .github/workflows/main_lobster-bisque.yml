@@ -70,3 +70,7 @@ jobs:
           slot-name: 'Production'
           package: .
           
+      - name: 'Run Web App'
+        run: |
+          npm run start
+          
